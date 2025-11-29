@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>About – Cadright</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <style>
+    :root {
+      --bg-dark: #021620;
+      --bg-page: #020a10;
+      --accent: #00b3c9;      /* teal accent */
+      --accent-deep: #003b8e; /* Cadright blue */
+      --text-main: #ffffff;
+      --text-muted: #9ca3af;
+      --card-bg: #031b27;
+      --border-soft: rgba(148, 163, 184, 0.35);
+      --radius: 18px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg-page);
+      color: var(--text-main);
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      min-height: 100vh;
+    }
+
+    /* ========== TOP NAV (copied from index) ========== */
+
+    .top-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 60px;
+      background: rgba(0, 0, 0, 0.96);
+      color: #f9fafb;
+      display: flex;
+      align-items: center;
+      z-index: 40;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+    }
+
+    .top-nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .nav-logo {
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .nav-logo a {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nav-logo img {
+      height: 80px;
+      width: auto;
+      display: block;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      list-style: none;
+    }
+
+    .nav-links li {
+      position: relative;
+    }
+
+    .nav-links a {
+      position: relative;
+      padding-bottom: 2px;
+      white-space: nowrap;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 2px;
+      background: #ffffff;
+      transition: width 0.2s ease-out;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    /* Desktop dropdown */
+    .has-dropdown .dropdown {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: #000;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      border-radius: 8px;
+      min-width: 220px;
+      padding: 6px 0;
+      z-index: 50;
+    }
+
+    .has-dropdown .dropdown a {
+      display: block;
+      padding: 8px 12px;
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .has-dropdown .dropdown a:hover {
+      background: rgba(55, 65, 81, 0.7);
+    }
+
+    .has-dropdown:hover .dropdown {
+      display: block;
+    }
+
+    .mobile-menu-toggle {
+      display: none;
+      font-size: 24px;
+      cursor: pointer;
+      line-height: 1;
+    }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 60px;
+      left: 0;
+      right: 0;
+      background: #000000;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.3);
+      padding: 10px 20px;
+      z-index: 35;
+      flex-direction: column;
+    }
+
+    .mobile-menu a {
+      color: #f9fafb;
+      padding: 10px 0;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      border-bottom: 1px solid rgba(55, 65, 81, 0.7);
+    }
+
+    .mobile-dropdown-toggle {
+      background: none;
+      border: none;
+      color: #f9fafb;
+      padding: 10px 0;
+      text-align: left;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      border-bottom: 1px solid rgba(55, 65, 81, 0.7);
+      cursor: pointer;
+    }
+
+    .mobile-dropdown {
+      display: none;
+      flex-direction: column;
+      padding-left: 12px;
+    }
+
+    .mobile-dropdown a {
+      border-bottom: none;
+      font-size: 12px;
+      letter-spacing: 0.12em;
+    }
+
+    .mobile-menu.open {
+      display: flex;
+    }
+
+    @media (max-width: 900px) {
+      .nav-links {
+        display: none;
+      }
+      .nav-logo {
+        font-size: 10px;
+        letter-spacing: 0.13em;
+      }
+      .mobile-menu-toggle {
+        display: block;
+      }
+    }
+
+    /* ========== ABOUT SECTION ========== */
+
+    .about-section {
+      background: var(--bg-dark);
+      padding: 80px 8vw 90px;
+      display: flex;
+      justify-content: center;
+      /* push content down so it doesn't hide behind fixed nav */
+      margin-top: 60px;
+    }
+
+    .about-inner {
+      max-width: 1200px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      gap: 56px;
+      align-items: center;
+    }
+
+    .about-heading {
+      font-size: clamp(40px, 5vw, 58px);
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      margin-bottom: 24px;
+    }
+
+    .about-body {
+      font-size: 15px;
+      max-width: 620px;
+      color: var(--accent);
+    }
+
+    .about-body p + p {
+      margin-top: 16px;
+    }
+
+    .about-tagline {
+      margin-top: 28px;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--text-muted);
+    }
+
+    .about-image-wrapper {
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow:
+        0 26px 60px rgba(0, 0, 0, 0.75),
+        0 0 0 1px rgba(15, 23, 42, 0.4);
+    }
+
+    .about-image-wrapper img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* ========== OUR TEAM SECTION ========== */
+
+    .team-section {
+      padding: 70px 8vw 80px;
+      background: #edf2f4;
+      display: flex;
+      justify-content: center;
+    }
+
+    .team-inner {
+      max-width: 1200px;
+      width: 100%;
+      text-align: center;
+      color: #111827;
+    }
+
+    .team-eyebrow {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--accent-deep);
+      margin-bottom: 6px;
+    }
+
+    .team-heading {
+      font-size: 28px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .team-intro {
+      max-width: 620px;
+      font-size: 14px;
+      color: #6b7280;
+      margin: 0 auto 40px auto;
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .team-card {
+      background: #f4f7fb;
+      border-radius: 999px;
+      padding: 32px 18px 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      box-shadow: 0 12px 26px rgba(15, 23, 42, 0.06);
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .team-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
+    }
+
+    .avatar-circle {
+      width: 120px;
+      height: 120px;
+      border-radius: 999px;
+      background: #ffffff;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.12);
+    }
+
+    .avatar-circle img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      display: block;
+    }
+
+    .team-name {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 4px;
+      color: #111827;
+    }
+
+    .team-role {
+      font-size: 13px;
+      color: #4b5563;
+      margin-bottom: 10px;
+    }
+
+    .team-bio {
+      font-size: 13px;
+      color: #6b7280;
+      margin-bottom: 14px;
+    }
+
+    .team-socials {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      margin-top: 4px;
+    }
+
+    .social-circle {
+      width: 30px;
+      height: 30px;
+      border-radius: 999px;
+      background: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      color: #4b5563;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      cursor: pointer;
+      transition: background 0.15s ease, color 0.15s ease, transform 0.15s ease;
+    }
+
+    .social-circle:hover {
+      background: var(--accent-deep);
+      color: #ffffff;
+      transform: translateY(-1px);
+    }
+
+    footer {
+      padding: 14px 8vw 20px;
+      font-size: 11px;
+      color: var(--text-muted);
+      text-align: center;
+      border-top: 1px solid rgba(15,23,42,0.7);
+      background: #000000;
+    }
+
+    /* ========== RESPONSIVE ========== */
+
+    @media (max-width: 1024px) {
+      .team-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 900px) {
+      .about-section {
+        padding: 60px 6vw 70px;
+      }
+
+      .about-inner {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 32px;
+      }
+
+      .about-image-wrapper {
+        max-width: 520px;
+        margin: 0 auto;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .about-section {
+        padding: 48px 5vw 54px;
+      }
+
+      .about-heading {
+        font-size: 34px;
+      }
+
+      .team-section {
+        padding: 52px 5vw 60px;
+      }
+
+      .team-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- TOP NAV – same as index.html -->
+  <nav class="top-nav">
+    <div class="top-nav-inner">
+      <div class="nav-logo">
+        <a href="index.html">
+          <img src="cgrc-logo.png" alt="CGRC logo">
+          <span>CGRC</span>
+        </a>
+      </div>
+
+      <ul class="nav-links">
+        <li><a href="About.html">About us</a></li>
+        <a href="projects.html">Our Projects</a>
+</li>
+        <li><a href="publications.html">Publications</a></li>
+        <li><a href="themes.html">Theme</a></li>
+        <li><a href="Contact.html">Contact</a></li>
+      </ul>
+
+      <div class="mobile-menu-toggle">☰</div>
+    </div>
+  </nav>
+
+  <!-- MOBILE NAV – same as index.html -->
+  <div class="mobile-menu">
+    <a href="About.html">About us</a>
+    <button class="mobile-dropdown-toggle">Our Projects ▾</button>
+    <div class="mobile-dropdown">
+      <a href="projects.html#challenge-2026">2026 Challenge</a>
+      <a href="projects.html#green-skills">Green Skills Insight Series</a>
+    </div>
+    <a href="publications.html">Publications</a>
+    <a href="themes.html">Theme</a>
+    <a href="engage.html">Contact</a>
+  </div>
+
+  <!-- ABOUT SECTION -->
+  <section class="about-section">
+    <div class="about-inner">
+      <div>
+        <h1 class="about-heading">Who we are</h1>
+
+        <div class="about-body">
+          <p>
+            Cadright is a practice–driven collective working at the intersection of
+            technology, research and the built environment. Our network brings
+            together professionals from diverse backgrounds to solve real-world
+            problems with data, design and digital tools.
+          </p>
+          <p>
+            We design, deploy and manage research-backed frameworks for clients
+            ranging from universities and schools to private ventures and industry
+            partners. Our goal is simple: turn complex challenges into clear,
+            actionable solutions.
+          </p>
+        </div>
+
+        <div class="about-tagline">
+          RESEARCH · DIGITAL TOOLS · BUILT ENVIRONMENT
+        </div>
+      </div>
+
+      <div class="about-image-wrapper">
+        <!-- Replace with your own image -->
+        <img src="About us.jpg" alt="">
+      </div>
+    </div>
+  </section>
+
+  <!-- OUR TEAM SECTION WITH IMAGES -->
+  <section class="team-section">
+    <div class="team-inner">
+      <div class="team-eyebrow">Our team</div>
+      <h2 class="team-heading">People behind the work</h2>
+      <p class="team-intro">
+        A small, distributed team of researchers, designers and technologists, working together
+        to deliver practical, evidence-based solutions.
+      </p>
+
+      <div class="team-grid">
+
+        <!-- Member 1 -->
+        <article class="team-card">
+          <div class="avatar-circle">
+            <!-- Use your own image file -->
+            <img src="person1.jpg" alt="Team member 1">
+          </div>
+          <div class="team-name">Arc Dr. Kosi Chukwujindu Emmanuel</div>
+          <div class="team-role">Director</div>
+          <div class="team-bio">
+            Leads strategy and oversees delivery across major research and digital innovation projects.
+          </div>
+          <div class="team-socials">
+            <div class="social-circle">in</div>
+            <div class="social-circle">X</div>
+            <div class="social-circle">@</div>
+          </div>
+        </article>
+
+        <!-- Member 2 -->
+        <article class="team-card">
+          <div class="avatar-circle">
+            <img src="person2.jpg" alt="Team member 2">
+          </div>
+          <div class="team-name">Chibuzo Obiorah(B.sc Arch,M.sc Eng.)</div>
+          <div class="team-role">Research Lead</div>
+          <div class="team-bio">
+            Designs studies, coordinates fieldwork and shapes insight reports for clients and partners.
+          </div>
+          <div class="team-socials">
+            <div class="social-circle">in</div>
+            <div class="social-circle">X</div>
+            <div class="social-circle">@</div>
+          </div>
+        </article>
+
+        <!-- Member 3 -->
+        <article class="team-card">
+          <div class="avatar-circle">
+            <img src="person3.jpg" alt="Team member 3">
+          </div>
+          <div class="team-name">Paul Newman</div>
+          <div class="team-role">Technical Lead</div>
+          <div class="team-bio">
+            Builds and maintains the data, dashboard and automation infrastructure behind our projects.
+          </div>
+          <div class="team-socials">
+            <div class="social-circle">in</div>
+            <div class="social-circle">X</div>
+            <div class="social-circle">@</div>
+          </div>
+        </article>
+
+        <!-- Member 4 -->
+        <article class="team-card">
+          <div class="avatar-circle">
+            <img src="person4.jpg" alt="Team member 4">
+          </div>
+          <div class="team-name">Sarah Dowson</div>
+          <div class="team-role">Programs & Partners</div>
+          <div class="team-bio">
+            Manages collaborations with universities, industry and professional bodies across regions.
+          </div>
+          <div class="team-socials">
+            <div class="social-circle">in</div>
+            <div class="social-circle">X</div>
+            <div class="social-circle">@</div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © Cadright · All rights reserved.
+  </footer>
+
+</div>
+
+<script>
+  const mobileToggle = document.querySelector(".mobile-menu-toggle");
+  const mobileMenu = document.querySelector(".mobile-menu");
+  const mobileDropdownToggle = document.querySelector(".mobile-dropdown-toggle");
+  const mobileDropdown = document.querySelector(".mobile-dropdown");
+
+  if (mobileToggle && mobileMenu) {
+    mobileToggle.addEventListener("click", () => {
+      mobileMenu.classList.toggle("open");
+    });
+  }
+
+  if (mobileDropdownToggle && mobileDropdown) {
+    mobileDropdownToggle.addEventListener("click", () => {
+      mobileDropdown.style.display =
+        mobileDropdown.style.display === "flex" ? "none" : "flex";
+    });
+  }
+</script>
+
+</body>
+</html>

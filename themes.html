@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>CGRC – Research Themes</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+
+:root {
+  --bg-page: #0b0b0b;
+  --bg-section: #ffffff;
+  --accent: #0f766e;
+  --accent-soft: #e0f2f1;
+  --text-main: #111827;
+  --text-muted: #6b7280;
+  --border-soft: #e5e7eb;
+  --radius: 14px;
+  --max-width: 960px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: var(--bg-page);
+  color: var(--text-main);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #f3f4f6;
+}
+
+/* ========== TOP NAV + DROPDOWN ========== */
+
+.top-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background: rgba(0, 0, 0, 0.96);
+  color: #f9fafb;
+  display: flex;
+  align-items: center;
+  z-index: 40;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+}
+
+.top-nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+.nav-logo {
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.nav-logo a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.nav-logo img {
+  height: 80px;
+  width: auto;
+  display: block;
+}
+
+.nav-links {
+  display: flex;
+  gap: 18px;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  list-style: none;
+}
+.nav-links li {
+  position: relative;
+}
+.nav-links a {
+  position: relative;
+  padding-bottom: 2px;
+  white-space: nowrap;
+}
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background: #ffffff;
+  transition: width 0.2s ease-out;
+}
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Desktop dropdown */
+.has-dropdown .dropdown {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #000;
+  border: 1px solid rgba(148, 163, 184, 0.6);
+  border-radius: 8px;
+  min-width: 220px;
+  padding: 6px 0;
+  z-index: 50;
+}
+.has-dropdown .dropdown a {
+  display: block;
+  padding: 8px 12px;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.has-dropdown .dropdown a:hover {
+  background: rgba(55, 65, 81, 0.7);
+}
+.has-dropdown:hover .dropdown {
+  display: block;
+}
+
+.nav-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.btn {
+  border-radius: 999px;
+  padding: 7px 14px;
+  font-size: 12px;
+  font-weight: 500;
+  border: 1px solid transparent;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+.btn-outline-light {
+  border-color: rgba(249, 250, 251, 0.75);
+  color: #e5e7eb;
+  background: transparent;
+}
+.btn-outline-light:hover {
+  background: rgba(249, 250, 251, 0.12);
+}
+.btn-light-solid {
+  background: #f9fafb;
+  color: #111827;
+  border-color: #f9fafb;
+  font-weight: 600;
+}
+.btn-light-solid:hover {
+  background: #e5e7eb;
+}
+
+/* Mobile nav */
+.mobile-menu-toggle {
+  display: none;
+  font-size: 24px;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 60px;
+  left: 0;
+  right: 0;
+  background: #000000;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.3);
+  padding: 10px 20px;
+  z-index: 35;
+  flex-direction: column;
+}
+
+.mobile-menu a {
+  color: #f9fafb;
+  padding: 10px 0;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  border-bottom: 1px solid rgba(55, 65, 81, 0.7);
+}
+
+.mobile-dropdown-toggle {
+  background: none;
+  border: none;
+  color: #f9fafb;
+  padding: 10px 0;
+  text-align: left;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  border-bottom: 1px solid rgba(55, 65, 81, 0.7);
+  cursor: pointer;
+}
+
+.mobile-dropdown {
+  display: none;
+  flex-direction: column;
+  padding-left: 12px;
+}
+
+.mobile-dropdown a {
+  border-bottom: none;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+}
+
+.mobile-menu.open {
+  display: flex;
+}
+
+@media (max-width: 900px) {
+  .nav-links {
+    display: none;
+  }
+  .nav-logo {
+    font-size: 10px;
+    letter-spacing: 0.13em;
+  }
+  .mobile-menu-toggle {
+    display: block;
+  }
+}
+
+/* ========== HERO ========== */
+
+.hero {
+  position: relative;
+  min-height: 55vh;
+  color: #f9fafb;
+  padding-top: 60px; /* offset for nav */
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+}
+
+.hero-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.8),
+    rgba(0, 0, 0, 0.45),
+    rgba(0, 0, 0, 0.7)
+  );
+  pointer-events: none;
+}
+
+.hero-content-wrapper {
+  position: relative;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 80px 40px 40px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: calc(55vh - 60px);
+}
+
+@media (max-width: 900px) {
+  .hero-content-wrapper {
+    padding: 80px 20px 30px 20px;
+  }
+}
+
+.hero-kicker {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.28em;
+  margin-bottom: 10px;
+  color: #bbf7d0;
+}
+
+.hero-title {
+  font-size: clamp(28px, 4vw, 40px);
+  font-weight: 600;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  line-height: 1.2;
+  margin-bottom: 14px;
+}
+
+.hero-subtitle {
+  font-size: 14px;
+  max-width: 640px;
+  color: #e5e7eb;
+  margin-bottom: 20px;
+}
+
+.hero-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-size: 11px;
+  color: #d1d5db;
+}
+
+.hero-chip {
+  border-radius: 999px;
+  border: 1px solid rgba(229, 231, 235, 0.4);
+  padding: 4px 10px;
+  background: rgba(15, 23, 42, 0.7);
+}
+
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 24px;
+  }
+  .hero-subtitle {
+    font-size: 13px;
+  }
+}
+
+/* ========== MAIN CONTENT SECTIONS ========== */
+
+main {
+  background: #f3f4f6;
+  padding-top: 16px;
+}
+
+.section {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 24px 16px;
+}
+
+.section-header {
+  margin-bottom: 12px;
+}
+
+.section-eyebrow {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+
+.section-title {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #020617;
+}
+
+.section-desc {
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.block {
+  background: var(--bg-section);
+  border-radius: var(--radius);
+  border: 1px solid var(--border-soft);
+  padding: 16px 14px;
+  margin-bottom: 12px;
+}
+
+.block h3,
+.block h2 {
+  font-size: 16px;
+  margin-bottom: 4px;
+}
+
+.block .section-desc {
+  margin-bottom: 8px;
+}
+
+.list {
+  margin-top: 6px;
+  margin-left: 1.25rem;
+  list-style: disc;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.list li {
+  margin-bottom: 4px;
+}
+
+.steps {
+  margin-top: 6px;
+  list-style: none;
+  font-size: 14px;
+  color: var(--text-muted);
+  padding-left: 0;
+}
+
+.steps li {
+  padding-left: 26px;
+  position: relative;
+  margin-bottom: 6px;
+}
+
+.steps li::before {
+  content: attr(data-step);
+  position: absolute;
+  left: 0;
+  top: 1px;
+  width: 18px;
+  height: 18px;
+  font-size: 11px;
+  border-radius: 999px;
+  border: 1px solid var(--accent);
+  background: var(--accent-soft);
+  color: var(--accent);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* FAQ styles (used on challenge page) */
+
+.faq-item {
+  background: #ffffff;
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius);
+  padding: 10px;
+  margin-bottom: 6px;
+  cursor: pointer;
+}
+
+.faq-q {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+}
+
+.faq-a {
+  display: none;
+  margin-top: 6px;
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+.faq-item.open .faq-a {
+  display: block;
+}
+
+.faq-toggle {
+  font-size: 16px;
+  color: var(--text-muted);
+}
+
+footer {
+  border-top: 1px solid var(--border-soft);
+  padding: 12px 16px;
+  text-align: center;
+  font-size: 11px;
+  color: var(--text-muted);
+  background: #ffffff;
+  margin-top: 20px;
+}
+
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <nav class="top-nav">
+    <div class="top-nav-inner">
+      <div class="nav-logo">
+        <a href="index.html">
+          <img src="cgrc-logo.png" alt="CGRC logo">
+          <span>CGRC</span>
+        </a>
+      </div>
+
+      <ul class="nav-links">
+        <li><a href="About.html">About us</a></li>
+        <li>
+  <a href="projects.html">Our Projects</a>
+</li>
+
+        <li><a href="publications.html">Publications</a></li>
+        <li><a href="Theme.html">Theme</a></li>
+        <li><a href="Contact.html">Contact</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        
+      </div>
+
+      <div class="mobile-menu-toggle">☰</div>
+    </div>
+  </nav>
+
+  <div class="mobile-menu">
+    <a href="About.html">About us</a>
+    <a href="projects.html">Our Projects</a>
+    <a href="publications.html">Publications</a>
+    <a href="Theme.html">Theme</a>
+    <a href="Contact.html">Contact</a>
+  </div>
+
+
+  <main style="padding-top:70px;background:#f3f4f6">
+    <section class="section">
+      <div class="section-header">
+        <div class="section-eyebrow">RESEARCH THEMES</div>
+        <h1 class="section-title">What we research at CGRC</h1>
+        <p class="section-desc">
+          Our research is structured into interconnected themes that guide our projects,
+          publications, and collaborations.
+        </p>
+      </div>
+
+      <div class="block">
+        <h3>Energy-efficient & Climate-responsive Buildings</h3>
+        <p class="section-desc">
+          We explore design strategies, performance optimisation techniques, and
+          adaptive solutions tailored to African climates.
+        </p>
+      </div>
+
+      <div class="block">
+        <h3>Green Skills, Jobs & Workforce Development</h3>
+        <p class="section-desc">
+          Mapping skills gaps, future job demands, and pathways for building a
+          resilient African green workforce.
+        </p>
+      </div>
+
+      <div class="block">
+        <h3>Education, Curriculum & Professional Development</h3>
+        <p class="section-desc">
+          Research into sustainable education frameworks, curriculum innovation,
+          and professional training programmes.
+        </p>
+      </div>
+
+      <div class="block">
+        <h3>Policy, Practice & Implementation Research</h3>
+        <p class="section-desc">
+          Analysing policies and implementation challenges to improve green
+          practices at scale across African cities.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    Cadright Global Research Cell (CGRC) · Research Themes · All Rights Reserved
+  </footer>
+</div>
+
+<script>
+
+  const mobileToggle = document.querySelector(".mobile-menu-toggle");
+  const mobileMenu = document.querySelector(".mobile-menu");
+  const mobileDropdownToggle = document.querySelector(".mobile-dropdown-toggle");
+  const mobileDropdown = document.querySelector(".mobile-dropdown");
+
+  if (mobileToggle && mobileMenu) {
+    mobileToggle.addEventListener("click", () => {
+      mobileMenu.classList.toggle("open");
+    });
+  }
+
+  if (mobileDropdownToggle && mobileDropdown) {
+    mobileDropdownToggle.addEventListener("click", () => {
+      mobileDropdown.style.display =
+        mobileDropdown.style.display === "flex" ? "none" : "flex";
+    });
+  }
+
+  document.querySelectorAll(".faq-item").forEach(item => {
+    item.addEventListener("click", () => {
+      item.classList.toggle("open");
+      const toggle = item.querySelector(".faq-toggle");
+      if (toggle) {
+        toggle.textContent = item.classList.contains("open") ? "–" : "+";
+      }
+    });
+  });
+
+</script>
+</body>
+</html>
