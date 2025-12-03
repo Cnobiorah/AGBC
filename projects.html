@@ -175,13 +175,17 @@ a {
   background: rgba(249, 250, 251, 0.12);
 }
 .btn-light-solid {
-  background: #f9fafb;
-  color: #111827;
-  border-color: #f9fafb;
+  background: linear-gradient(135deg, #003b8e, #2563eb);
+  color: #ffffff;
+  border-color: #003b8e;
   font-weight: 600;
+  box-shadow: 0 6px 18px rgba(0, 59, 142, 0.25);
 }
+
 .btn-light-solid:hover {
-  background: #e5e7eb;
+  background: linear-gradient(135deg, #2563eb, #3b82f6);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 28px rgba(37, 99, 235, 0.4);
 }
 
 /* Mobile nav */
@@ -256,117 +260,11 @@ a {
   }
 }
 
-/* ========== HERO ========== */
-
-.hero {
-  position: relative;
-  min-height: 55vh;
-  color: #f9fafb;
-  padding-top: 60px; /* offset for nav */
-  overflow: hidden;
-}
-
-.hero-bg {
-  position: absolute;
-  inset: 0;
-}
-
-.hero-bg img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.hero-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to right,
-    rgba(0, 0, 0, 0.8),
-    rgba(0, 0, 0, 0.45),
-    rgba(0, 0, 0, 0.7)
-  );
-  pointer-events: none;
-}
-
-.hero-content-wrapper {
-  position: relative;
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 80px 40px 40px 40px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  min-height: calc(55vh - 60px);
-}
-
-@media (max-width: 900px) {
-  .hero-content-wrapper {
-    padding: 80px 20px 30px 20px;
-  }
-}
-
-.hero-kicker {
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 0.28em;
-  margin-bottom: 10px;
-  color: #bbf7d0;
-}
-
-.hero-title {
-  font-size: clamp(28px, 4vw, 40px);
-  font-weight: 600;
-  letter-spacing: 0.10em;
-  text-transform: uppercase;
-  line-height: 1.2;
-  margin-bottom: 14px;
-}
-
-.hero-subtitle {
-  font-size: 14px;
-  max-width: 640px;
-  color: #e5e7eb;
-  margin-bottom: 20px;
-}
-
-.hero-buttons {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-bottom: 16px;
-}
-
-.hero-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  font-size: 11px;
-  color: #d1d5db;
-}
-
-.hero-chip {
-  border-radius: 999px;
-  border: 1px solid rgba(229, 231, 235, 0.4);
-  padding: 4px 10px;
-  background: rgba(15, 23, 42, 0.7);
-}
-
-@media (max-width: 480px) {
-  .hero-title {
-    font-size: 24px;
-  }
-  .hero-subtitle {
-    font-size: 13px;
-  }
-}
-
 /* ========== MAIN CONTENT SECTIONS ========== */
 
 main {
-  background: #f3f4f6;
-  padding-top: 16px;
+  background: radial-gradient(circle at top left, #ecfdf5, #f3f4f6 42%, #e0f2f1 100%);
+  padding-top: 90px;
 }
 
 .section {
@@ -377,34 +275,72 @@ main {
 
 .section-header {
   margin-bottom: 12px;
+  padding: 16px 18px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #003b8e, #2563eb);
+  color: #ecfeff;
+  box-shadow: 0 10px 30px rgba(0, 59, 142, 0.35);
 }
 
 .section-eyebrow {
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 0.2em;
-  color: var(--accent);
+  color: #a5f3fc;
   margin-bottom: 4px;
 }
 
 .section-title {
   font-size: 20px;
   font-weight: 600;
-  margin-bottom: 6px;
-  color: #020617;
+  margin-bottom: 4px;
+  color: #ecfeff;
 }
 
 .section-desc {
   font-size: 14px;
-  color: var(--text-muted);
+  color: #e0f2f1;
 }
+
+/* project cards */
 
 .block {
   background: var(--bg-section);
-  border-radius: var(--radius);
+  border-radius: 18px;
   border: 1px solid var(--border-soft);
-  padding: 16px 14px;
-  margin-bottom: 12px;
+  padding: 16px 16px 18px;
+  margin-bottom: 16px;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+  position: relative;
+  overflow: hidden;
+}
+
+.block::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top right, rgba(34, 197, 133, 0.08), transparent 55%);
+  pointer-events: none;
+}
+
+.block-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 6px;
+}
+
+.block-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  background: #ecfdf5;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  color: #0f766e;
+  flex-shrink: 0;
 }
 
 .block h3,
@@ -415,6 +351,7 @@ main {
 
 .block .section-desc {
   margin-bottom: 8px;
+  color: var(--text-muted);
 }
 
 .list {
@@ -428,6 +365,8 @@ main {
 .list li {
   margin-bottom: 4px;
 }
+
+/* steps kept for other pages if you re-use */
 
 .steps {
   margin-top: 6px;
@@ -518,19 +457,16 @@ footer {
       </div>
 
       <ul class="nav-links">
+	  <li><a href="index.html">Home</a></li>
         <li><a href="About.html">About us</a></li>
-        <li>
-  <a href="projects.html">Our Projects</a>
-</li>
-
+        <li><a href="projects.html">Our Projects</a></li>
         <li><a href="publications.html">Publications</a></li>
         <li><a href="Theme.html">Theme</a></li>
+		<li><a href="media-gallery.html">Media Gallery</a></li>
         <li><a href="Contact.html">Contact</a></li>
       </ul>
 
-      <div class="nav-actions">
-        
-      </div>
+      <div class="nav-actions"></div>
 
       <div class="mobile-menu-toggle">☰</div>
     </div>
@@ -540,16 +476,14 @@ footer {
     <a href="About.html">About us</a>
     <button class="mobile-dropdown-toggle">Our Projects ▾</button>
     <div class="mobile-dropdown">
-      <a href="Our projects.html#challenge-2026">2026 Challenge</a>
-      
+      <a href="projects.html#challenge-2026">2026 Challenge</a>
     </div>
     <a href="publications.html">Publications</a>
     <a href="Theme.html">Theme</a>
     <a href="Contact.html">Contact</a>
   </div>
 
-
-  <main style="padding-top:70px;background:#f3f4f6">
+  <main>
     <section class="section">
       <div class="section-header">
         <div class="section-eyebrow">PROJECTS</div>
@@ -563,12 +497,17 @@ footer {
 
     <section class="section" id="challenge-2026">
       <div class="block">
-        <h2>Africa-Wide Green Building Research Challenge 2026</h2>
-        <p class="section-desc">
-          A pan-African design and research challenge inviting students and
-          built-environment practitioners to develop climate-responsive,
-          human-centred and resource-efficient buildings.
-        </p>
+        <div class="block-header">
+          <div class="block-icon">📐</div>
+          <div>
+            <h2>Africa-Wide Green Building Research Challenge 2026</h2>
+            <p class="section-desc">
+              A pan-African design and research challenge inviting students and
+              built-environment practitioners to develop climate-responsive,
+              human-centred and resource-efficient buildings.
+            </p>
+          </div>
+        </div>
         <ul class="list">
           <li>Focus on energy performance, water efficiency and material optimisation.</li>
           <li>Open to students, graduates and professionals across Africa.</li>
@@ -580,6 +519,62 @@ footer {
       </div>
     </section>
 
+    <section class="section" id="mentifyhub">
+  <div class="block">
+    <div class="block-header">
+      <div class="block-icon">🤝</div>
+      <div>
+        <h2>MentifyHub – AI-Powered Mentorship for the Built Environment</h2>
+        <p class="section-desc">
+          A digital mentorship platform that connects students and early-career professionals with mentors
+          across the built environment and green skills space, using structured profiles and intelligent matching.
+        </p>
+      </div>
+    </div>
+
+    <ul class="list">
+      <li>Bridges mentorship gaps for architecture, engineering and sustainability-focused careers.</li>
+      <li>Pairs mentees with mentors based on goals, experience level and area of practice.</li>
+      <li>Supports Africa-centred pathways while enabling global mentor participation.</li>
+    </ul>
+
+    <p style="margin-top:16px;">
+      <a href="https://mentifyhub.com" target="_blank" class="btn btn-light-solid">
+        Launch MentifyHub →
+      </a>
+    </p>
+  </div>
+</section>
+
+	<section class="section" id="mentorship-study">
+  <div class="block">
+    <div class="block-header">
+      <div class="block-icon">📊</div>
+      <div>
+        <h2>Africa-Wide Mentorship Access Study</h2>
+        <p class="section-desc">
+          A continent-wide research project examining access to mentorship, career guidance and skills development 
+          across Africa’s architecture, engineering and built environment sectors. The study captures real experiences 
+          from students, interns, graduates and professionals to map mentorship gaps, opportunities and patterns.
+        </p>
+      </div>
+    </div>
+
+    <ul class="list">
+      <li>Open to students, graduates, interns and built-environment professionals across Africa.</li>
+      <li>Designed to understand mentorship access, barriers and development pathways.</li>
+      <li>Forms part of CGRC’s research on skills, education and professional growth.</li>
+    </ul>
+
+    <p style="margin-top:12px;">
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLScVFJtipn5SzuXWweGIjslt92xtUIfm1Fxb36dCeACEFxSQhw/viewform?usp=dialog" 
+         class="btn btn-light-solid" target="_blank">
+        Take the Study Survey
+      </a>
+    </p>
+  </div>
+</section>
+
     
   </main>
 
@@ -589,7 +584,6 @@ footer {
 </div>
 
 <script>
-
   const mobileToggle = document.querySelector(".mobile-menu-toggle");
   const mobileMenu = document.querySelector(".mobile-menu");
   const mobileDropdownToggle = document.querySelector(".mobile-dropdown-toggle");
@@ -617,7 +611,6 @@ footer {
       }
     });
   });
-
 </script>
 </body>
 </html>

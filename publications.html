@@ -175,13 +175,17 @@ a {
   background: rgba(249, 250, 251, 0.12);
 }
 .btn-light-solid {
-  background: #f9fafb;
-  color: #111827;
-  border-color: #f9fafb;
+  background: linear-gradient(135deg, #003b8e, #2563eb);
+  color: #ffffff;
+  border-color: #003b8e;
   font-weight: 600;
+  box-shadow: 0 6px 18px rgba(0, 59, 142, 0.25);
 }
+
 .btn-light-solid:hover {
-  background: #e5e7eb;
+  background: linear-gradient(135deg, #2563eb, #3b82f6);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 28px rgba(37, 99, 235, 0.4);
 }
 
 /* Mobile nav */
@@ -256,117 +260,11 @@ a {
   }
 }
 
-/* ========== HERO ========== */
-
-.hero {
-  position: relative;
-  min-height: 55vh;
-  color: #f9fafb;
-  padding-top: 60px; /* offset for nav */
-  overflow: hidden;
-}
-
-.hero-bg {
-  position: absolute;
-  inset: 0;
-}
-
-.hero-bg img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.hero-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to right,
-    rgba(0, 0, 0, 0.8),
-    rgba(0, 0, 0, 0.45),
-    rgba(0, 0, 0, 0.7)
-  );
-  pointer-events: none;
-}
-
-.hero-content-wrapper {
-  position: relative;
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 80px 40px 40px 40px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  min-height: calc(55vh - 60px);
-}
-
-@media (max-width: 900px) {
-  .hero-content-wrapper {
-    padding: 80px 20px 30px 20px;
-  }
-}
-
-.hero-kicker {
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 0.28em;
-  margin-bottom: 10px;
-  color: #bbf7d0;
-}
-
-.hero-title {
-  font-size: clamp(28px, 4vw, 40px);
-  font-weight: 600;
-  letter-spacing: 0.10em;
-  text-transform: uppercase;
-  line-height: 1.2;
-  margin-bottom: 14px;
-}
-
-.hero-subtitle {
-  font-size: 14px;
-  max-width: 640px;
-  color: #e5e7eb;
-  margin-bottom: 20px;
-}
-
-.hero-buttons {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-bottom: 16px;
-}
-
-.hero-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  font-size: 11px;
-  color: #d1d5db;
-}
-
-.hero-chip {
-  border-radius: 999px;
-  border: 1px solid rgba(229, 231, 235, 0.4);
-  padding: 4px 10px;
-  background: rgba(15, 23, 42, 0.7);
-}
-
-@media (max-width: 480px) {
-  .hero-title {
-    font-size: 24px;
-  }
-  .hero-subtitle {
-    font-size: 13px;
-  }
-}
-
 /* ========== MAIN CONTENT SECTIONS ========== */
 
 main {
-  background: #f3f4f6;
-  padding-top: 16px;
+  background: radial-gradient(circle at top right, #ecfdf5, #f3f4f6 45%, #e0f2f1 100%);
+  padding-top: 90px;
 }
 
 .section {
@@ -377,34 +275,72 @@ main {
 
 .section-header {
   margin-bottom: 12px;
+  padding: 16px 18px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #003b8e, #2563eb);
+  color: #ecfeff;
+  box-shadow: 0 10px 30px rgba(0, 59, 142, 0.35);
 }
 
 .section-eyebrow {
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 0.2em;
-  color: var(--accent);
+  color: #a5f3fc;
   margin-bottom: 4px;
 }
 
 .section-title {
   font-size: 20px;
   font-weight: 600;
-  margin-bottom: 6px;
-  color: #020617;
+  margin-bottom: 4px;
+  color: #ecfeff;
 }
 
 .section-desc {
   font-size: 14px;
-  color: var(--text-muted);
+  color: #e0f2f1;
 }
+
+/* publication cards */
 
 .block {
   background: var(--bg-section);
-  border-radius: var(--radius);
+  border-radius: 18px;
   border: 1px solid var(--border-soft);
-  padding: 16px 14px;
-  margin-bottom: 12px;
+  padding: 16px 16px 18px;
+  margin-bottom: 16px;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+  position: relative;
+  overflow: hidden;
+}
+
+.block::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.09), transparent 60%);
+  pointer-events: none;
+}
+
+.block-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 6px;
+}
+
+.block-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  background: #ecfeff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  color: #0f766e;
+  flex-shrink: 0;
 }
 
 .block h3,
@@ -415,7 +351,10 @@ main {
 
 .block .section-desc {
   margin-bottom: 8px;
+  color: var(--text-muted);
 }
+
+/* lists / steps kept if needed */
 
 .list {
   margin-top: 6px;
@@ -460,7 +399,7 @@ main {
   justify-content: center;
 }
 
-/* FAQ styles (used on challenge page) */
+/* FAQ styles */
 
 .faq-item {
   background: #ffffff;
@@ -518,19 +457,16 @@ footer {
       </div>
 
       <ul class="nav-links">
+	  <li><a href="index.html">Home</a></li>
         <li><a href="About.html">About us</a></li>
-       <li>
-  <a href="projects.html">Our Projects</a>
-</li>
-
+        <li><a href="projects.html">Our Projects</a></li>
         <li><a href="publications.html">Publications</a></li>
         <li><a href="Theme.html">Theme</a></li>
+		<li><a href="media-gallery.html">Media Gallery</a></li>
         <li><a href="Contact.html">Contact</a></li>
       </ul>
 
-      <div class="nav-actions">
-        
-      </div>
+      <div class="nav-actions"></div>
 
       <div class="mobile-menu-toggle">☰</div>
     </div>
@@ -540,8 +476,7 @@ footer {
     <a href="About.html">About us</a>
     <button class="mobile-dropdown-toggle">Our Projects ▾</button>
     <div class="mobile-dropdown">
-      <a href="Our projects.html#challenge-2026">2026 Challenge</a>
-      
+      <a href="projects.html#challenge-2026">2026 Challenge</a>
     </div>
     <a href="publications.html">Publications</a>
     <a href="Theme.html">Theme</a>
@@ -549,7 +484,7 @@ footer {
   </div>
 
 
-  <main style="padding-top:70px;background:#f3f4f6">
+  <main>
     <section class="section">
       <div class="section-header">
         <div class="section-eyebrow">PUBLICATIONS</div>
@@ -561,41 +496,78 @@ footer {
       </div>
 
       <div class="block">
-        <h3>Green Skill Revolution: Building a Workforce for the Future</h3>
-        <p class="section-desc">
-          Explores the global urgency for green skills and Africa’s position in
-          emerging green economies.
-        </p>
+        <div class="block-header">
+          <div class="block-icon">📘</div>
+          <div>
+            <h3>Green Skill Revolution: Building a Workforce for the Future</h3>
+            <p class="section-desc">
+              Explores the global urgency for green skills and Africa’s position in
+              emerging green economies.
+            </p>
+          </div>
+        </div>
         <a href="https://drive.google.com/file/d/12jgCjCiURK63-Cb-lFk7sGHr8qnBLr5N/view?usp=sharing"
            class="btn btn-light-solid">Download</a>
       </div>
 
       <div class="block">
-        <h3>Energy Rating Systems For Green Buildings</h3>
-        <p class="section-desc">
-          Focus on Improved Awareness of Professionals
-        </p>
+        <div class="block-header">
+          <div class="block-icon">🏗️</div>
+          <div>
+            <h3>Energy Rating Systems For Green Buildings</h3>
+            <p class="section-desc">
+              Focus on improved awareness of professionals and the role of rating tools
+              in mainstreaming green building practice.
+            </p>
+          </div>
+        </div>
         <a href="https://www.scribd.com/document/81921568/Energy-Rating-Sytems-for-Green-Buildings"
            class="btn btn-light-solid">Read more</a>
       </div>
 	  
 	  <div class="block">
-        <h3>Green Skills: The Global Priority for a Sustainable Future</h3>
-        <p class="section-desc">
-          A data-driven look at global green workforce shifts and their relevance to Africa.
-        </p>
+        <div class="block-header">
+          <div class="block-icon">🌍</div>
+          <div>
+            <h3>Green Skills: The Global Priority for a Sustainable Future</h3>
+            <p class="section-desc">
+              A data-driven look at global green workforce shifts and their relevance to Africa.
+            </p>
+          </div>
+        </div>
         <a href="https://drive.google.com/file/d/12jgCjCiURK63-Cb-lFk7sGHr8qnBLr5N/view?usp=sharing"
            class="btn btn-light-solid">Download</a>
       </div>
 	  
 	  <div class="block">
-        <h3>Thermal Comfort in Tropical High-Rise Buildings: A review of published research</h3>
-        <p class="section-desc">
-         The concept of high-rise buildings continues to provide a meaningful solution for land conservation in cities. Highrise buildings stand out for many good reasons.
-        </p>
+        <div class="block-header">
+          <div class="block-icon">🌡️</div>
+          <div>
+            <h3>Thermal Comfort in Tropical High-Rise Buildings: A Review of Published Research</h3>
+            <p class="section-desc">
+              Reviews thermal comfort research in high-rise buildings within tropical climates,
+              highlighting implications for design and policy.
+            </p>
+          </div>
+        </div>
         <a href="https://acrobat.adobe.com/id/urn:aaid:sc:EU:c6aff6e8-d641-4e0b-82c9-ee7fc0de96f4"
            class="btn btn-light-solid">Download</a>
       </div>
+
+      <div class="block" id="building-code-eval">
+        <div class="block-header">
+          <div class="block-icon">📑</div>
+          <div>
+            <h3>Automated Building Code Evaluation System</h3>
+            <p class="section-desc">
+              A machine-assisted framework that analyses architectural drawings against
+              building regulations, offering faster compliance checks for designers, reviewers and regulators.
+            </p>
+          </div>
+        </div>
+        <a href="#" class="btn btn-light-solid">Read more</a>
+      </div>
+
     </section>
   </main>
 
@@ -605,7 +577,6 @@ footer {
 </div>
 
 <script>
-
   const mobileToggle = document.querySelector(".mobile-menu-toggle");
   const mobileMenu = document.querySelector(".mobile-menu");
   const mobileDropdownToggle = document.querySelector(".mobile-dropdown-toggle");
@@ -633,7 +604,6 @@ footer {
       }
     });
   });
-
 </script>
 </body>
 </html>
